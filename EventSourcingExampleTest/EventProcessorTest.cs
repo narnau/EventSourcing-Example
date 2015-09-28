@@ -39,7 +39,7 @@ namespace EventSourcingExampleTest
             EntryEvent ev = new EntryEvent(new DateTime(2015, 09, 01), parkingBarcelona, newCar);
             eProc.Process(ev);
             
-            Assert.AreEqual(eProc.log[0], ev);
+            Assert.AreEqual(eProc.Log[0], ev);
         }
 
         [TestMethod]
@@ -50,7 +50,7 @@ namespace EventSourcingExampleTest
             EntryEvent ev = new EntryEvent(ocurred, parkingBarcelona, newCar);
             eProc.Process(ev);
 
-            Assert.AreEqual(ocurred, ev.ocurred);
+            Assert.AreEqual(ocurred, ev.Ocurred);
         }
 
         [TestMethod]

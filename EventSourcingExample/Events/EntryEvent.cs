@@ -9,18 +9,18 @@ namespace EventSourcingExample.Events
 {
     public class EntryEvent : DomainEvent
     {
-        private Car _car;
-        private Parking _parking;
+        private Car car;
+        private Parking parking;
 
         public EntryEvent(DateTime dateTime, Parking currentParking, Car currentCar) : base(dateTime)
         {
-            this._parking = currentParking;
-            this._car = currentCar;
+            this.parking = currentParking;
+            this.car = currentCar;
         }
 
         public override void Process()
         {
-            this._car.Parking = this._parking;
+            this.car.Parking = this.parking;
         }
     }
 }

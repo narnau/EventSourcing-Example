@@ -8,12 +8,12 @@ namespace EventSourcingExample.Events
 {
     public abstract class DomainEvent
     {
-        public DateTime ocurred, recorded;
+        public DateTime Ocurred, Recorded;
 
-        internal DomainEvent(DateTime dateTime)
+        internal DomainEvent(DateTime ocurred)
         {
-            this.ocurred = dateTime;
-            this.recorded = DateTime.Now;
+            this.Ocurred = ocurred;
+            this.Recorded = DateTime.Now;
         }
 
         public abstract void Process();

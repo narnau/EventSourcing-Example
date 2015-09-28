@@ -8,11 +8,11 @@ namespace EventSourcingExample.Models
 {
     public class Car
     {
-        private string _name;
+        private string name;
 
         public Car(string name)
         {
-            this._name = name;
+            this.name = name;
         }
 
         public Parking Parking { get; set; }

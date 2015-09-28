@@ -9,12 +9,12 @@ namespace EventSourcingExample.Events
 {
     public class EventProcessor
     {
-        public IList<DomainEvent> log = new List<DomainEvent>();
+        public IList<DomainEvent> Log = new List<DomainEvent>();
 
         public void Process(DomainEvent ev)
         {
             ev.Process();
-            log.Add(ev);
+            Log.Add(ev);
         }
     }
 }
