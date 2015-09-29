@@ -2,6 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EventSourcingExample.Models;
 using EventSourcingExample.Events;
+using EventSourcingExample.Restore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace EventSourcingExampleTest
 {
@@ -61,6 +64,25 @@ namespace EventSourcingExampleTest
             ExitEvent ev = new ExitEvent(new DateTime(2015, 09, 01), newCar);
             eProc.Process(ev);
             Assert.AreEqual(park.Name, newCar.Parking.Name);
+        }
+
+        [TestMethod]
+        public void RestoreApplicationToCertainEvent()
+        {
+            eProc = new EventProcessor();
+            IList<DomainEvent> log = new List<DomainEvent>()
+            {
+                new EntryEvent(new DateTime(2015, 08, 01), parkingBarcelona, newCar),
+                new ExitEvent(new DateTime(2015, 09, 01), newCar),
+                new EntryEvent(new DateTime(2015, 09, 01), parkingParis, oldCar),
+                new ExitEvent(new DateTime(2015, 09, 01), oldCar)
+            };
+
+            AppRepairer appRepairer = new AppRepairer(log, eProc);
+
+            appRepairer.RepairApplication();
+
+            Assert.IsTrue(log.SequenceEqual(eProc.Log));
         }
     }
 }
